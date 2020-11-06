@@ -16,13 +16,11 @@ const validateQuestions = (questions) => {
     return false;
   let result = true;
   questions.forEach(q => {
-    console.log(q);
     switch (q.type) {
       case "american":
         q.answers.forEach(ans => {
 
           if (ans.length < 1) {
-            console.log("<1");
             result = false;
           }
         });
@@ -36,7 +34,6 @@ const validateQuestions = (questions) => {
 
       case "number": // should validate range // future improvement 
         if (q.value.length < 1) {
-          console.log("<1");
 
           result = false;
         }
@@ -112,8 +109,7 @@ const CreateFormContainer = () => {
   }
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-    console.log("submit");
-    console.log();
+  
 
     if(!validateQuestions(formData)){
       alert("invalid form");
@@ -176,8 +172,7 @@ const CreateFormContainer = () => {
     const newFormData = formData.slice();
 
     if (qType === "american") {
-      console.log(e.target.value);
-      console.log(value);
+      
 
       let question = newFormData.find(q => q.id === id);
       if (!question) {
@@ -208,7 +203,6 @@ const CreateFormContainer = () => {
   };
   const onClickRemoveQuestionHandler = (id) => {
     const newForm = formData.filter(q => q.id !== id);
-    console.log("after delete", newForm);
     setFormData(newForm);
   }
 
