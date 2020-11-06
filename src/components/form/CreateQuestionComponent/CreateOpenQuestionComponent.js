@@ -7,7 +7,7 @@ const CreateNumberQuestionComponent = ({ index, data, onChange, onDelete }) => {
 
     return (
         <div className="CreateQuestionComponent">
-            CreateNumberQuestionComponent
+            CreateOpenQuestionComponent
             <Form.Group grouped style={{ border: '1px solid black' }}>
 
                 <div style={{ position: 'absolute', right: 0 }}>
@@ -21,12 +21,12 @@ const CreateNumberQuestionComponent = ({ index, data, onChange, onDelete }) => {
                         placeholder="Question"
                         onChange={(e, { value }) => onChange(e, data.id, -1, data, 'q', value, "open")}
                     />
-
+{/* 
                     <Form.Input
                         value={data.value}
                         onChange={(e, { value }) => onChange(e, data.id, -1, data, 'value', value, "open")}
 
-                    />
+                    /> */}
                 </div>
             </Form.Group>
         </div>

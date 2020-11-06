@@ -24,9 +24,18 @@ const CreateNumberQuestionComponent = ({ index, data, onChange, onDelete }) => {
                     />
 
                     <Form.Input
-                        value={data.value}
+                        value={data.min}
                         type="number"
-                        onChange={(e, { value }) => onChange(e, data.id, -1, data, 'value', value, "number")}
+                        label="Min"
+                        onChange={(e, { value }) => onChange(e, data.id, -1, data, 'min', value, "number")}
+
+                    />
+                    <Form.Input
+                        value={data.max}
+                        type="number"
+                        label="Max"
+
+                        onChange={(e, { value }) => onChange(e, data.id, -1, data, 'max', value, "number")}
 
                     />
                 </div>

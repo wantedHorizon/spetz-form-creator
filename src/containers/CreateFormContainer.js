@@ -1,6 +1,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable no-restricted-globals */
-import React, {  useState } from 'react';
+import React, { useState } from 'react';
 import { Form as SemanticForm, FormButton } from 'semantic-ui-react';
 import Form from '../components/form/Form';
 // import quizAPI from '../api/quiz-api';
@@ -9,6 +9,12 @@ import CreateNumberQuestionComponent from '../components/form/CreateQuestionComp
 import CreateOpenQuestionComponent from '../components/form/CreateQuestionComponent/CreateOpenQuestionComponent';
 
 // const OPTION_NUMBER = 3;
+const questionOptions = [
+  { key: 'american', value: 'american', text: 'American Question' },
+  { key: 'number', value: 'number', text: 'Number Question' },
+  { key: 'open', value: 'open', text: 'Open Question' },
+
+]
 let id = 0;
 
 const validateQuestions = (questions) => {
@@ -27,13 +33,13 @@ const validateQuestions = (questions) => {
         break;
 
       case "open":
-        if (q.value.length < 1) {
-          result = false;
-        }
+        // if (q.value.length < 1) {
+        //   result = false;
+        // }
         break;
 
       case "number": // should validate range // future improvement 
-        if (q.value.length < 1) {
+        if ((q.min > q.max)) {
 
           result = false;
         }
@@ -53,12 +59,7 @@ const validateQuestions = (questions) => {
 };
 
 const CreateFormContainer = () => {
-  const questionOptions = [
-    { key: 'american', value: 'american', text: 'American Question' },
-    { key: 'number', value: 'number', text: 'Number Question' },
-    { key: 'open', value: 'open', text: 'Open Question' },
 
-  ]
 
   const [formData, setFormData] = useState([]);
   // const [loading, setLoading] = useState(false);
@@ -70,6 +71,7 @@ const CreateFormContainer = () => {
   נעים!`);
 
   const [newQuestionType, setNewQuestionType] = useState('american');
+
 
   const displayForm = () => {
     return formData.map((q, i) => {
@@ -107,11 +109,16 @@ const CreateFormContainer = () => {
     }
     )
   }
+
+
+
+  // events handlers
+
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-  
 
-    if(!validateQuestions(formData)){
+
+    if (!validateQuestions(formData)) {
       alert("invalid form");
       return;
     }
@@ -126,7 +133,6 @@ const CreateFormContainer = () => {
     console.log(data);
     alert("data is printed to console.")
   };
-
   const addNewQuestionHandler = () => {
     let newQuestion;
     switch (newQuestionType) {
@@ -144,6 +150,8 @@ const CreateFormContainer = () => {
         newQuestion = {
           q: '',
           type: 'number',
+          min: 0,
+          max: 0,
           value: '',
           id
         }
@@ -172,7 +180,7 @@ const CreateFormContainer = () => {
     const newFormData = formData.slice();
 
     if (qType === "american") {
-      
+
 
       let question = newFormData.find(q => q.id === id);
       if (!question) {
@@ -213,10 +221,14 @@ const CreateFormContainer = () => {
 
       <Form className="ui form " onSubmit={onSubmitHandler}>
         <SemanticForm.Group widths="equal">
-          <SemanticForm.TextArea label="Welcome Message" placeholder='Tell us more' value={welcome} onChange={(e, { value }) => setWelcome(value)} />
+          <SemanticForm.TextArea label="Welcome Message"
+            placeholder='Tell us more'
+            value={welcome}
+            onChange={(e, { value }) => setWelcome(value)} />
         </SemanticForm.Group>
 
         <div className="inline-fields">{displayForm()}</div>
+        
         <div className="field">
           <SemanticForm.Select
             placeholder='Question Type'
