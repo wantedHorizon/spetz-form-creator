@@ -131,7 +131,9 @@ const CreateFormContainer = () => {
     }
 
     console.log(data);
-    alert("data is printed to console.")
+    console.log(JSON.stringify(data));
+    alert("data is printed to console.");
+    alert(JSON.stringify(data));
   };
   const addNewQuestionHandler = () => {
     let newQuestion;
@@ -228,7 +230,7 @@ const CreateFormContainer = () => {
         </SemanticForm.Group>
 
         <div className="inline-fields">{displayForm()}</div>
-        
+
         <div className="field">
           <SemanticForm.Select
             placeholder='Question Type'
@@ -243,7 +245,12 @@ const CreateFormContainer = () => {
           </button>
 
           <SemanticForm.Group widths="equal">
-            <SemanticForm.TextArea label="Goodbye Message" placeholder='Tell us more' value={goodbye} onChange={(e, { value }) => setGoodbye(value)} />
+            <SemanticForm.TextArea
+              label="Goodbye Message"
+              placeholder='Tell us more'
+              value={goodbye}
+              onChange={(e, { value }) => setGoodbye(value)}
+            />
           </SemanticForm.Group>
         </div>
         <div className="field">
